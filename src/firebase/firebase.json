@@ -1,6 +1,6 @@
 {
     "hosting": {
-      "public": "your_public_directory", 
+      "public": "dist", 
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -16,7 +16,6 @@
     "rules": {
       ".read": "auth != null",
       ".write": "auth != null"
-
     }
   }
   
