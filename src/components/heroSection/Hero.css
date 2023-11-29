@@ -1,0 +1,16 @@
+.parallax-container {
+    position: relative;
+    background-image: url('../../Img/motorcycles-race-helmets-pilots-163414.webp'); /* Replace with your actual image path */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .content {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the opacity as needed for readability */
+    padding: 20px;
+  }
+  
