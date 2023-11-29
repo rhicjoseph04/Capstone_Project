@@ -1,6 +1,6 @@
 {
     "hosting": {
-      "public": "your_public_directory", // Replace with the directory where your web app's assets are built
+      "public": "your_public_directory", 
       "ignore": [
         "firebase.json",
         "**/.*",
