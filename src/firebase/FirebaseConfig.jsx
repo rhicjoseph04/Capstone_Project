@@ -3,13 +3,14 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth } from "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBHzdX6y66Jat6YtC0byIuFoRpitgpLAUA",
-  authDomain: "myfirstapp-a0c8d.firebaseapp.com",
-  projectId: "myfirstapp-a0c8d",
-  storageBucket: "myfirstapp-a0c8d.appspot.com",
-  messagingSenderId: "744064884100",
-  appId: "1:744064884100:web:8f8636ba62c4fda15a91d1"
+  apiKey: "AIzaSyB0bkKGqwF5O7kVzBRsye-a8yokleRMe1s",
+  authDomain: "eliteride-helmets-and-gear.firebaseapp.com",
+  projectId: "eliteride-helmets-and-gear",
+  storageBucket: "eliteride-helmets-and-gear.appspot.com",
+  messagingSenderId: "588989816066",
+  appId: "1:588989816066:web:944bf71896970a32ce761b"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

@@ -11,6 +11,7 @@ import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 
 
 function Navbar() {
+  const [selectedCurrency, setSelectedCurrency] = useState('PHP');
   const context = useContext(myContext);
   const {mode, toggleMode} = context;
 
@@ -18,7 +19,9 @@ function Navbar() {
 
   const user = JSON.parse(localStorage.getItem('user'));
 
-
+  const handleCurrencyChange = (newCurrency) => {
+    setSelectedCurrency(newCurrency);
+  };
 
   const logout = () => {
     localStorage.clear('user');
@@ -65,7 +68,7 @@ function Navbar() {
                 </div>
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-  {/* Conditionally render h1 based on screen size */}
+  
   {window.innerWidth < 1024 && (
     <h1 className='text-2xl font-bold text-black px-2 py-1 rounded' style={{ color: mode === 'dark' ? 'white' : '' }}>
       EliteRide Helmet and Gear
@@ -101,27 +104,40 @@ function Navbar() {
     <Link to={'/'} className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer">
       <img
         className="inline-block w-10 h-10 rounded-full"
-        src="https://overreacted.io/static/profile-pic-c715447ce38098828758e525a1128b87.jpg"
+        src="./src/Img/motocareslogo.jpg"
         alt="Rhic_Chavez"
       />
     </Link>
   </div>
 
-  {/* Change Currency Link */}
-  <div className="border-t border-gray-200 px-4 py-6">
-    <a href="#" className="-m-2 flex items-center p-2">
-      <img
-        src="/src/Img/philippineflag.png"
-        alt=""
-        className="block h-auto w-5 flex-shrink-0"
-      />
-      <span className="ml-3 block text-base font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>
-        Philippines
-      </span>
-      <span className="sr-only">, change currency</span>
-    </a>
+     {/* Change Currency Link */}
+     <div className="border-t border-gray-200 px-4 py-6">
+        <div className="-m-2 flex items-center p-2">
+          <img
+            src="/src/Img/philippineflag.png"
+            alt=""
+            className="block h-auto w-5 flex-shrink-0"
+          />
+          <span className="ml-3 block text-base font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>
+            {selectedCurrency}
+          </span>
+          <span className="sr-only">, change currency</span>
+
+          {/* Dropdown for currency selection */}
+          <select
+            className="ml-2 p-1 border border-gray-300 rounded"
+            value={selectedCurrency}
+            onChange={(e) => handleCurrencyChange(e.target.value)}
+          >
+            <option value="PHP">PHP</option>
+            <option value="USD">USD</option> {/* Added USD option */}
+    </select>
   </div>
 </div>
+
+</div>
+
+
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -130,18 +146,21 @@ function Navbar() {
 
       {/* desktop  */}
       <header className="relative bg-white">
-      <p className="flex h-10 items-center justify-center bg-black px-4 text-sm font-medium text-white sm:px-6 lg:px-8" style={{ backgroundColor: mode === 'dark' ? 'rgb(62 64 66)' : '#1a1a2e', color: mode === 'dark' ? 'white' : '' }}>
-      <FontAwesomeIcon icon={faMotorcycle} style={{ marginLeft: '1em', color: 'orange' }} />
-  Your Journey Awaits with FREE Shipping! 🚚
- 
-</p>
-        <nav aria-label="Top" className="bg-gray-100 px-4 sm:px-6 lg:px-8 shadow-xl " style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
+        <p
+          className="flex h-10 items-center justify-center bg-black px-4 text-sm font-medium text-white sm:px-6 lg:px-8"
+          style={{ backgroundColor: mode === 'dark' ? 'rgb(62 64 66)' : '#1a1a2e', color: mode === 'dark' ? 'white' : '' }}
+        >
+          <FontAwesomeIcon icon={faMotorcycle} style={{ marginLeft: '1em', color: 'orange' }} />
+          Your Journey Awaits with FREE Shipping! 🚚
+        </p>
+        <nav aria-label="Top" className="bg-gray-100 px-4 sm:px-6 lg:px-8 shadow-xl" style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '' }}>
           <div className="">
             <div className="flex h-16 items-center">
               <button
                 type="button"
                 className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
-                onClick={() => setOpen(true)} style={{ backgroundColor: mode === 'dark' ? 'rgb(80 82 87)' : '', color: mode === 'dark' ? 'white' : '', }}
+                onClick={() => setOpen(true)}
+                style={{ backgroundColor: mode === 'dark' ? 'rgb(80 82 87)' : '', color: mode === 'dark' ? 'white' : '' }}
               >
          <span className="sr-only">Open menu</span>
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -150,24 +169,31 @@ function Navbar() {
 
 
               </button>
-
-              {/* Logo */}
-              <div className="ml-4 flex lg:ml-0">
+{/* Logo */}
+<div className="ml-4 flex lg:ml-0">
   <Link to={'/'}>
     <div className="flex items-center">
       <FaShopware
-        className="text-4xl text-orange-500 hover:text-blue-500 transition duration-300"
+        className="text-4xl lg:text-5xl text-orange-500 hover:text-blue-500 transition duration-300"
         style={{ marginLeft: '5px' }}
       />
-      <h1
-        className='text-2xl font-bold text-black px-2 py-1 rounded'
-        style={{ color: mode === 'dark' ? 'white' : '' }}
-      >
-        EliteRide Helmet and Gear
-      </h1>
+      {/* Conditionally render h1 based on screen size */}
+      {window.innerWidth >= 421 && window.innerWidth > 1024 && (
+        <h1
+          className='text-2xl font-bold text-black px-2 py-1 rounded'
+          style={{ 
+            color: mode === 'dark' ? 'white' : '',
+            fontSize: '1 rem', 
+          }}
+        >
+         EliteRide 
+        </h1>
+      )}
     </div>
   </Link>
 </div>
+
+
 
               <div className="ml-auto flex items-center">
               <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">

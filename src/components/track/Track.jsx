@@ -1,15 +1,33 @@
-import React, { useContext } from 'react'
-import myContext from '../../context/data/myContext'
+import React, { useContext, useEffect, useState } from 'react';
+import myContext from '../../context/data/myContext';
 
 function Track() {
-    const context = useContext(myContext);
-    const { mode } = context;
+  const context = useContext(myContext);
+  const { mode } = context;
+  const [firebaseImage, setFirebaseImage] = useState('');
 
-    return (
-        <div>
-            <section className="text-gray-600 body-font">
-                <div className="container px-5 md:py-5  mx-auto">
-                    <div className="flex flex-wrap -m-4 text-center">
+  useEffect(() => {
+    const imageUrl = 'https://firebasestorage.googleapis.com/v0/b/myfirstapp-a0c8d.appspot.com/o/peso%20png.png?alt=media&token=4513d360-893d-4dfc-8076-634128d716df';
+
+    fetch(imageUrl)
+      .then(response => response.blob())
+      .then(blob => {
+        const reader = new FileReader();
+        reader.onloadend = function () {
+          const base64data = reader.result.replace(/^data:.+;base64,/, '');
+          const dataUri = 'data:image/png;base64,' + base64data;
+          setFirebaseImage(dataUri);
+        };
+
+        reader.readAsDataURL(blob);
+      });
+  }, []); // The empty dependency array ensures that this effect runs only once
+
+  return (
+    <div>
+      <section className="text-gray-600 body-font">
+        <div className="container px-5 md:py-5 mx-auto">
+          <div className="flex flex-wrap -m-4 text-center">
                         <div className="p-4 md:w-1/3 sm:w-1/2 w-full">
                             <div className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 shadow-[inset_0_0_2px_rgba(0,0,0,0.6)] px-4 py-6 rounded-lg" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '' }}>
                                 <svg className="text-black w-12 h-12 mb-3 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -34,12 +52,13 @@ function Track() {
                         </div>
                         <div className="p-4 md:w-1/3 sm:w-1/2 w-full">
                             <div className="border-2 hover:shadow-xl hover:shadow-gray-200 border-gray-200 bg-gray-100 shadow-[inset_0_0_2px_rgba(0,0,0,0.6)] px-4 py-6 rounded-lg" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '' }}>
-                                <svg xmlns="/src/Img/img_455842.svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="text-black w-12 h-12 mb-3 inline-block">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <h2 className="title-font font-medium text-lg text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>Exciting Offers</h2>
-                                <p className="leading-relaxed">"Discover irresistible deals and exclusive discounts that will elevate your shopping experience.Explore exclusive deals and discounts."</p>
+                            <svg xmlns="/src/Img/img_455842.svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="text-black w-12 h-12 mb-3 inline-block">
+                  <image xlinkHref={firebaseImage} width="24" height="24" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="gs://myfirstapp-a0c8d.appspot.com/peso png.png
+Access to" />
+                </svg>
+                <h2 className="title-font font-medium text-lg text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>Exciting Offers</h2>
+                <p className="leading-relaxed">"Discover irresistible deals and exclusive discounts that will elevate your shopping experience.Explore exclusive deals and discounts."</p>
                             </div>
                         </div>
                     </div>
