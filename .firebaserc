@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "myfirstapp-a0c8d",
-    "EliteRide ": "myfirstapp-a0c8d"
+    "EliteRide": "eliteride-helmets-and-gear",
+    "default": "eliteride-helmets-and-gear"
   },
   "targets": {},
   "etags": {}
